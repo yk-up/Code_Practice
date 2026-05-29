@@ -83,3 +83,29 @@
 
 
 
+
+#include<bits/stdc++.h>
+using namespace std;
+const int N=1e4+11;
+const int p=1e9+7;
+int a[N];
+int dp[N];//以 i 结尾的方案数量
+int n,w;
+int main()
+{
+    cin>>n>>w;
+    for(int i=1;i<=n;i++)cin>>a[i];
+
+    dp[0]=1;
+    for(int j=1;j<=w;j++)
+    {
+        for(int i=1;i<=n;i++)
+        {
+            if(j>=a[i])
+            dp[j]=(dp[j]+dp[j-a[i]])%p;
+        }
+    }
+    cout<<dp[w];
+    
+    return 0;
+}

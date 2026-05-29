@@ -190,6 +190,7 @@
 // {
 //     fa[x][0]=0;
 //     depth[x]=1;
+
 //     queue<int>q;
 //     q.push(x);
 //     while(q.size())
@@ -248,3 +249,82 @@
 //     return 0;
 // }
 
+
+#include<bits/stdc++.h>
+using namespace std;
+int n,m,s;
+const int N=5e5+11;
+const int LOG=21;
+int fa[N][LOG];
+int depth[N];
+vector<int>g[N];
+
+void bfs(int s)
+{
+    queue<int>q;
+    q.push(s);
+    depth[s]=1;
+    fa[s][0]=0;
+    while(q.size())
+    {
+        int x=q.front();q.pop();
+        for(int i=0;i<g[x].size();i++)
+        {
+            int y=g[x][i];
+            if(y!=fa[x][0])//不能走回头路
+            {
+                fa[y][0]=x;
+                depth[y]=depth[x]+1;
+                for(int i=1;i<LOG;i++)
+                {
+                    fa[y][i]=fa[fa[y][i-1]][i-1];
+                }
+                q.push(y);
+            }
+            
+        }
+    }
+}
+int lca(int x,int y)
+{
+    if(depth[x]<depth[y])
+    {
+        swap(x,y);
+    }
+
+    //if(fa[x][0]==y)return y;
+    //x 向上跳和 y 一样的高度
+
+    for(int i=LOG-1;i>=0;i--)
+    {
+        //if(depth[fa[x][i]]<depth[y])x=fa[x][i];
+        if(depth[fa[x][i]]>=depth[y])x=fa[x][i];
+    }
+
+    if(x==y)return x;
+
+    for(int i=LOG-1;i>=0;i--)
+    {
+        if(fa[x][i]!=fa[y][i])x=fa[x][i],y=fa[y][i];
+    }
+    return fa[x][0];
+}
+int main()
+{
+    ios::sync_with_stdio(0),cin.tie(0),cout.tie(0);
+    cin>>n>>m>>s;
+    for(int i=0;i<n-1;i++)
+    {
+        int x,y;cin>>x>>y;
+        // fa[]
+        g[x].push_back(y);
+        g[y].push_back(x);
+    }
+    bfs(s);
+    while(m--)
+    {
+        int x,y;cin>>x>>y;
+        cout<<lca(x,y)<<endl;
+    }
+    return 0;
+}

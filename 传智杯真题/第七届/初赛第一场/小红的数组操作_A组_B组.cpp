@@ -108,26 +108,68 @@
     
 //     cout << ans << "\n";
     
+// //     return 0;
+// // }
+
+// #include<bits/stdc++.h>
+// using namespace std;
+// #define int long long
+// int n,k,x;
+// const int N=1e5+11;
+// int a[N];
+// bool check(int max_)
+// {
+//     int cnt=0;
+//     for(int i=1;i<=n;i++)
+//     {                               
+//         if(a[i]>max_)
+//         {
+//             cnt+=(a[i]-max_+(x-1))/x;//注意这个的计算方法 向上取整
+
+//             //剪枝
+//             //if(cnt>k)return true;// 【重要修复 1】增加剪枝，防止 cnt 在累加过程中爆 long long 变成负数
+//         }
+//     }
+//     if(cnt>k)return true;
+//     return false;
+// }
+// signed main()
+// {
+//     cin>>n>>k>>x;
+//     for(int i=1;i<=n;i++)cin>>a[i];
+
+//     sort(a+1,a+1+n);
+//     //枚举最大值 
+//     int l=-2e18,r=1e9;
+//     // 1 |2 3 4
+//     // 4 |3 3 2
+//     while(l+1!=r)
+//     {
+//         int mid=(l+r)/2;
+//         if(check(mid))l=mid;
+//         else r=mid;
+//     }
+//     cout<<r;
 //     return 0;
 // }
 
+//二分
 #include<bits/stdc++.h>
 using namespace std;
 #define int long long
-int n,k,x;
 const int N=1e5+11;
 int a[N];
-bool check(int max_)
+int n,k,x;
+
+bool check(int mid)
 {
     int cnt=0;
     for(int i=1;i<=n;i++)
-    {                               
-        if(a[i]>max_)
+    {
+        if(a[i]>mid)
         {
-            cnt+=(a[i]-max_+(x-1))/x;//注意这个的计算方法 向上取整
-
-            //剪枝
-            //if(cnt>k)return true;// 【重要修复 1】增加剪枝，防止 cnt 在累加过程中爆 long long 变成负数
+            cnt+=(a[i]-mid+(x-1))/x;
+            if(cnt>k)return true;//必须有否则可能溢出
         }
     }
     if(cnt>k)return true;
@@ -137,12 +179,12 @@ signed main()
 {
     cin>>n>>k>>x;
     for(int i=1;i<=n;i++)cin>>a[i];
-
     sort(a+1,a+1+n);
-    //枚举最大值 
-    int l=-2e18,r=1e9;
-    // 1 |2 3 4
-    // 4 |3 3 2
+    //数组的最大值尽可能小
+    //枚举最大的数
+    //1 |2 3 |4 5
+    //4 |3 3 |2 1  次数
+    int l=-2e18,r=0x3f3f3f3f;
     while(l+1!=r)
     {
         int mid=(l+r)/2;

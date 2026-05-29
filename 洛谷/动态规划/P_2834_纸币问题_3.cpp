@@ -52,3 +52,26 @@
 // }
 
 
+#include<bits/stdc++.h>
+using namespace std;
+const int p=1e9+7;
+const int N=1e5+11;
+int dp[N];
+int a[N];
+int n,w;
+int main()
+{
+    cin>>n>>w;
+    for(int i=1;i<=n;i++)cin>>a[i];
+    dp[0]=1;
+    for(int i=1;i<=n;i++)
+    {
+        for(int j=0;j<=w;j++)
+        {
+            if(j>=a[i])
+            dp[j]=(dp[j]+dp[j-a[i]])%p;
+        }
+    }
+    cout<<dp[w];
+    return 0;
+}

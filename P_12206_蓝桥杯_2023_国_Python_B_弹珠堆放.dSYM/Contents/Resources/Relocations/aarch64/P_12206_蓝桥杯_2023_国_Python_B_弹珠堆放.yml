@@ -1,0 +1,11 @@
+---
+triple:          'arm64-apple-darwin'
+binary-path:     "/Users/gyk/Desktop/Code/P_12206_蓝桥杯_2023_国_Python_B_弹珠堆放"
+relocations:
+  - { offset: 0x1603A, size: 0x8, addend: 0x0, symName: __ZStL8__ioinit, symObjAddr: 0x61675, symBinAddr: 0x100008000, symSize: 0x0 }
+  - { offset: 0x16137, size: 0x8, addend: 0x0, symName: _h, symObjAddr: 0x61678, symBinAddr: 0x100008008, symSize: 0x0 }
+  - { offset: 0x1626B, size: 0x8, addend: 0x0, symName: __GLOBAL__sub_I_P_12206___________2023_____Python_B_____________.cpp, symObjAddr: 0x178, symBinAddr: 0x100000818, symSize: 0x14 }
+  - { offset: 0x16282, size: 0x8, addend: 0x0, symName: __Z41__static_initialization_and_destruction_0v, symObjAddr: 0x13C, symBinAddr: 0x1000007DC, symSize: 0x3C }
+  - { offset: 0x162A0, size: 0x8, addend: 0x0, symName: _main, symObjAddr: 0x78, symBinAddr: 0x100000718, symSize: 0xC4 }
+  - { offset: 0x162E4, size: 0x8, addend: 0x0, symName: __Z6getsumx, symObjAddr: 0x0, symBinAddr: 0x1000006A0, symSize: 0x78 }
+...
