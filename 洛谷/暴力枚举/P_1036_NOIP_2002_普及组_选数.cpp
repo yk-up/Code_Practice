@@ -194,43 +194,87 @@
 //     return 0;
 // }
 
+//写define int long long 过不去！！！ 超时正好一个点
 #include<bits/stdc++.h>
 using namespace std;
+#define int long long
 const int N=30;
-int n,k;
 int a[N];
+int n,k;
 int b[N];
-int ans;
+int ans=0;
+//bool st[N];
 bool is_prime(int x)
 {
     if(x<=1)return false;
+    //for(int i=2;i<=x/i;i++)
     for(int i=2;i*i<=x;i++)
     {
         if(x%i==0)return false;
     }
     return true;
 }
-void dfs(int x,int start)//跟顺序无关
+// void dfs(int x,int start)
+// {
+//     if(x>k)
+//     {
+//         int temp=0;
+//         for(int i=1;i<=k;i++)temp+=b[i];
+//         if(is_prime(temp))ans++;
+
+//         return;
+//     }
+
+//     for(int i=start;i<=n;i++)
+//     {
+//         // if(st[a[i]]==0)
+//         // {
+//         //     b[x]=a[i];
+//         //     st[a[i]]=1;
+//         //     dfs(x+1);
+
+//         //     st[a[i]]=0;
+//         // }
+
+//         b[x]=a[i];
+//         dfs(x+1,i+1);
+//     }
+// }
+
+void dfs(int x,int start,int sum)
 {
     if(x>k)
     {
         int temp=0;
-        for(int i=1;i<=k;i++)temp+=b[i];
-        if(is_prime(temp))ans++;
+        //for(int i=1;i<=k;i++)temp+=b[i];
+
+        // if(is_prime(temp))ans++;
+        if(is_prime(sum))ans++;
+
         return;
     }
 
     for(int i=start;i<=n;i++)
     {
+        // if(st[a[i]]==0)
+        // {
+        //     b[x]=a[i];
+        //     st[a[i]]=1;
+        //     dfs(x+1);
+
+        //     st[a[i]]=0;
+        // }
+
         b[x]=a[i];
-        dfs(x+1,i+1);
+        dfs(x+1,i+1,sum+a[i]);
     }
 }
-int main()
+signed main()
 {
+    ios::sync_with_stdio(0),cin.tie(0),cout.tie(0);
     cin>>n>>k;
     for(int i=1;i<=n;i++)cin>>a[i];
-    dfs(1,1);
+    dfs(1,1,0);
     cout<<ans;
     return 0;
 }

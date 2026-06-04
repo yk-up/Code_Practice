@@ -158,57 +158,59 @@
 //     return 0;
 // }
 
-//12/17
+// //12/17
 
-//思路 1：全排列（公式）
-//思路二：枚举 9 个数()
-#include<bits/stdc++.h>
-using namespace std;
-int a,b,c;
-int s[10];
-bool st[10];
-int ans=0;
-void dfs(int x)
-{
-    if(x>9)
-    {
-        int A=s[1]*100+s[2]*10+s[3];
-        int B=s[4]*100+s[5]*10+s[6];
-        int C=s[7]*100+s[8]*10+s[9];
-        if(A*b==a*B&&A*c==a*C)
-        {
-            ans++;
-            cout<<A<<" "<<B<<" "<<C<<endl;
-        }
-        return;
-    }
+// //思路 1：全排列（公式）
+// //思路二：枚举 9 个数()
+// #include<bits/stdc++.h>
+// using namespace std;
+// int a,b,c;
+// int s[10];
+// bool st[10];
+// int ans=0;
+// void dfs(int x)
+// {
+//     if(x>9)
+//     {
+//         int A=s[1]*100+s[2]*10+s[3];
+//         int B=s[4]*100+s[5]*10+s[6];
+//         int C=s[7]*100+s[8]*10+s[9];
+//         if(A*b==a*B&&A*c==a*C)
+//         {
+//             ans++;
+//             cout<<A<<" "<<B<<" "<<C<<endl;
+//         }
+//         return;
+//     }
 
     
-    for(int i=1;i<=9;i++)
-    {
-        if(!st[i])
-        {
-            st[i]=1;
-            s[x]=i;
-            dfs(x+1);
-            st[i]=0;
-        }
+//     for(int i=1;i<=9;i++)
+//     {
+//         if(!st[i])
+//         {
+//             st[i]=1;
+//             s[x]=i;
+//             dfs(x+1);
+//             st[i]=0;
+//         }
         
-    }
-}
-int main()
-{
-    cin>>a>>b>>c;
-    // for(int i=1;i<=9;i++)s[i]=i;
-    // do
-    // {
-    //     int A=s[1]*100+s[2]*10+s[3];
-    //     int B=s[4]*100+s[5]*10+s[6];
-    //     int C=s[7]*100+s[8]*10+s[9];
-    //     if(A*b==a*B&&A*c==a*C)cout<<A<<" "<<B<<" "<<C<<endl;
-    // } while (next_permutation(s+1,s+1+9));
+//     }
+// }
+// int main()
+// {
+//     cin>>a>>b>>c;
+//     // for(int i=1;i<=9;i++)s[i]=i;
+//     // do
+//     // {
+//     //     int A=s[1]*100+s[2]*10+s[3];
+//     //     int B=s[4]*100+s[5]*10+s[6];
+//     //     int C=s[7]*100+s[8]*10+s[9];
+//     //     if(A*b==a*B&&A*c==a*C)cout<<A<<" "<<B<<" "<<C<<endl;
+//     // } while (next_permutation(s+1,s+1+9));
 
-    dfs(1);
-    if(!ans)cout<<"No!!!";
-    return 0;
-}
+//     dfs(1);
+//     if(!ans)cout<<"No!!!";
+//     return 0;
+// }
+
+

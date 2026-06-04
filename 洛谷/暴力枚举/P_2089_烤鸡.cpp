@@ -95,43 +95,49 @@
 
 #include<bits/stdc++.h>
 using namespace std;
+#define int long long
+const int N=1e4+11;
+int a[12];
+vector<int>ans[N];
+int res=0;
 int n;
-int ans;
-const int N=1e5+11;;
-int a[N][10];
-int b[10];
 void dfs(int x,int sum)
 {
+    if(sum>n)return;
     if(x>10)
     {
         if(sum==n)
         {
-            ans++;
+            res++;
             for(int i=1;i<=10;i++)
-            a[ans][i]=b[i];   
+            {
+                ans[res].push_back(a[i]);
+            }
         }
-        return;
+        return;//!!!别忘记
     }
+
     for(int i=1;i<=3;i++)
     {
-        b[x]=i;
-        dfs(x+1,sum+i);
+        a[x]=i;
+        //dfs(x+1,sum+=i);///!!!!我靠 这个会影响sum的值
+        //sum-=i;//需配合这个使用
+        
+        dfs(x+1,sum+i);//!!!
     }
     return;
 }
-int main()
+signed main()
 {
+    ios::sync_with_stdio(0),cin.tie(0),cout.tie(0);
     cin>>n;
     dfs(1,0);
-    cout<<ans<<endl;
-    for(int i=1;i<=ans;i++)
+    cout<<res<<endl;
+    for(int i=1;i<=res;i++)
     {
-        for(int j=1;j<=10;j++)
-        {
-            if(j>1)cout<<" ";
-            cout<<a[i][j];
-        }
+        for(int x:ans[i])cout<<x<<" ";
         cout<<endl;
     }
+    cout<<endl;
     return 0;
 }

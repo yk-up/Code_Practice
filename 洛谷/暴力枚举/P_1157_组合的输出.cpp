@@ -59,33 +59,3 @@
 //     dfs(1,1);
 //     return 0;
 // }
-
-#include<bits/stdc++.h>
-using namespace std;
-int n,r;
-const int N=22;
-int a[N];
-void dfs(int x,int start)
-{
-    if(x>r)
-    {
-        for(int i=1;i<=r;i++)
-        {
-            cout<<setw(3)<<a[i];
-        }
-        cout<<endl;
-        return ;
-    }
-
-    for(int i=start;i<=n;i++)
-    {
-        a[x]=i;
-        dfs(x+1,i+1);
-    }
-}
-int main()
-{
-    cin>>n>>r;
-    dfs(1,1);
-    return 0;
-}

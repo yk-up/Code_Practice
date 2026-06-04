@@ -100,55 +100,56 @@
 // }
 
 
-//思路横着搜索，竖着搜索
-#include<bits/stdc++.h>
-using namespace std;
-int r,c,k;
-const int N=102;
-char g[N][N];
-int main()
-{
-    cin>>r>>c>>k;
-    for(int i=1;i<=r;i++)
-    {
-        for(int j=1;j<=c;j++)cin>>g[i][j];
-    }
+// //思路横着搜索，竖着搜索
+// #include<bits/stdc++.h>
+// using namespace std;
+// int r,c,k;
+// const int N=102;
+// char g[N][N];
+// int main()
+// {
+//     cin>>r>>c>>k;
+//     for(int i=1;i<=r;i++)
+//     {
+//         for(int j=1;j<=c;j++)cin>>g[i][j];
+//     }
 
-    int ans=0;
-    //横着搜索
-    for(int i=1;i<=r;i++)
-    {
-        for(int j=1;j<=c;j++)
-        {
-            //这种写太复杂了，上面的写的简单，没有判断越界
-            if(j>c-k+1)break;
-            bool f=1;
-             for(int l=j;l<=j+k-1;l++)
-             {
-                if(g[i][l]=='.')continue;
-                f=0;
-                break;
-             }
-             if(f)ans++;
-        }
-    }
+//     int ans=0;
+//     //横着搜索
+//     for(int i=1;i<=r;i++)
+//     {
+//         for(int j=1;j<=c;j++)
+//         {
+//             //这种写太复杂了，上面的写的简单，没有判断越界
+//             if(j>c-k+1)break;
+//             bool f=1;
+//              for(int l=j;l<=j+k-1;l++)
+//              {
+//                 if(g[i][l]=='.')continue;
+//                 f=0;
+//                 break;
+//              }
+//              if(f)ans++;
+//         }
+//     }
 
-    for(int j=1;j<=c;j++)
-    {
-        for(int i=1;i<=r;i++)
-        {
-            if(i>r-k+1)break;
-            bool f=1;
-            for(int l=i;l<=i+k-1;l++)
-            {
-                if(g[l][j]=='.')continue;
-                f=0;
-                break;
-            }
-            if(f)ans++;
-        }
-    }
-    if(k==1)ans/=2;//这个极易出错
-    cout<<ans;
-    return 0;
-}
+//     for(int j=1;j<=c;j++)
+//     {
+//         for(int i=1;i<=r;i++)
+//         {
+//             if(i>r-k+1)break;
+//             bool f=1;
+//             for(int l=i;l<=i+k-1;l++)
+//             {
+//                 if(g[l][j]=='.')continue;
+//                 f=0;
+//                 break;
+//             }
+//             if(f)ans++;
+//         }
+//     }
+//     if(k==1)ans/=2;//这个极易出错
+//     cout<<ans;
+//     return 0;
+// }
+

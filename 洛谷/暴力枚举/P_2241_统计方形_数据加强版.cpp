@@ -56,21 +56,43 @@
 
 //好好理解一下，理解了好大一会
 //不重不漏地逐个检查所有的右下角位置。当我们把右下角固定在坐标 (i, j) 时，我们加上去的 min(i, j) 个正方形，它们的右下角全部都是 (i, j)
-//代码里的 i 和 j 不是尺子上的“刻度线”，而是网格里的“格子编号”。两个编号重合，代表你只圈中了这 1 个格子，而 1 个格子本身就是一个 1x1 的正方形！现在这个逻辑能顺利闭
+// //代码里的 i 和 j 不是尺子上的“刻度线”，而是网格里的“格子编号”。两个编号重合，代表你只圈中了这 1 个格子，而 1 个格子本身就是一个 1x1 的正方形！现在这个逻辑能顺利闭
+// #include<bits/stdc++.h>
+// using namespace std;
+// #define int long long
+// int ans1,ans2;
+// signed main()
+// {
+//     int n,m;cin>>n>>m;
+//     for(int i=1;i<=n;i++)
+//     {
+//         for(int j=1;j<=m;j++)
+//         {
+//             ans1+=min(i,j);
+//             ans2+=i*j;
+//         }
+//     }
+//     cout<<ans1<<" "<<ans2-ans1;
+// }
+
 #include<bits/stdc++.h>
 using namespace std;
 #define int long long
-int ans1,ans2;
+const int N=5004;
+int n,m;
 signed main()
 {
-    int n,m;cin>>n>>m;
+    ios::sync_with_stdio(0),cin.tie(0),cout.tie(0);
+    cin>>n>>m;
+    int ans1=0,ans2=0;
     for(int i=1;i<=n;i++)
     {
         for(int j=1;j<=m;j++)
         {
             ans1+=min(i,j);
-            ans2+=i*j;
+            ans2+=j*i;
         }
     }
-    cout<<ans1<<" "<<ans2-ans1;
+    cout<<ans1<<" "<<ans2-ans1<<endl;
+    return 0;
 }

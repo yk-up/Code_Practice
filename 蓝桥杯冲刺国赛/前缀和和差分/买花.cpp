@@ -87,6 +87,74 @@
 // }
 
 
+// #include<bits/stdc++.h>
+// using namespace std;
+// #define int long long
+// int n,k;
+// signed main()
+// {
+//     ios::sync_with_stdio(0),cin.tie(0),cout.tie(0);
+//     cin>>n>>k;
+//     string s;cin>>s;
+//     int n=s.size();
+//     // vector<int>cnt(26,0);//每个字母出现的次数
+
+//     //int valid=0;//窗口内=k的种类数
+
+//     int ans=0;
+//     for(int d=1;d<=26;d++)//枚举窗口的东西总类数
+//     {
+//         //注意这二行代码的初始化位置，每次窗口大小变化的时候，要初始化
+//         vector<int>cnt(26,0);//每个字母出现的次数
+//         int valid=0;
+        
+//         int window_size=d*k;
+        
+//         if(window_size>n)
+//         {
+//             break;
+//         }
+
+//         //初始化第一个窗口
+//         for(int i=0;i<window_size;i++)
+//         {
+//             char in_c=s[i];
+//             if(cnt[in_c-'a']==k)valid--;
+//             cnt[in_c-'a']++;
+
+//             if(cnt[in_c-'a']==k)valid++;
+//         }
+//         if(valid==d)
+//         {
+//             ans++;
+//         }
+
+//         //移动窗口
+//         for(int i=window_size;i<n;i++)
+//         {
+//             int in_c=s[i]-'a';//新进的字母
+//             int out_c=s[i-window_size]-'a';
+
+//             if(cnt[in_c]==k)valid--;
+//             cnt[in_c]++;
+//             if(cnt[in_c]==k)valid++;
+
+//             if(cnt[out_c]==k)valid--;
+//             cnt[out_c]--;
+//             if(cnt[out_c]==k)valid++;
+
+//             if(valid==d)
+//             {
+//                 ans++;
+//             }
+//         }
+
+//     }
+//     cout<<ans;
+//     return 0;
+// }
+
+
 #include<bits/stdc++.h>
 using namespace std;
 #define int long long
@@ -96,59 +164,41 @@ signed main()
     ios::sync_with_stdio(0),cin.tie(0),cout.tie(0);
     cin>>n>>k;
     string s;cin>>s;
-    int n=s.size();
-    // vector<int>cnt(26,0);//每个字母出现的次数
-
-    //int valid=0;//窗口内=k的种类数
-
     int ans=0;
-    for(int d=1;d<=26;d++)//枚举窗口的东西总类数
+    for(int d=1;d<=26;d++)
     {
-        //注意这二行代码的初始化位置，每次窗口大小变化的时候，要初始化
-        vector<int>cnt(26,0);//每个字母出现的次数
-        int valid=0;
-        
         int window_size=d*k;
-        
+
         if(window_size>n)
         {
-            break;
+            break;//!!!
         }
+        vector<int>cnt(26,0);
+        int valid=0;//等于k的数量
 
-        //初始化第一个窗口
         for(int i=0;i<window_size;i++)
         {
-            char in_c=s[i];
-            if(cnt[in_c-'a']==k)valid--;
-            cnt[in_c-'a']++;
-
-            if(cnt[in_c-'a']==k)valid++;
+            int in_c=s[i]-'a';
+            if(cnt[in_c]==k)valid--;
+            cnt[in_c]++;
+            if(cnt[in_c]==k)valid++;
         }
-        if(valid==d)
-        {
-            ans++;
-        }
+        if(valid==d)ans++;
 
-        //移动窗口
-        for(int i=window_size;i<n;i++)
+        for(int i=window_size;i<s.size();i++)
         {
-            int in_c=s[i]-'a';//新进的字母
-            int out_c=s[i-window_size]-'a';
-
+            int in_c=s[i]-'a';
             if(cnt[in_c]==k)valid--;
             cnt[in_c]++;
             if(cnt[in_c]==k)valid++;
 
+            int out_c=s[i-window_size]-'a';
             if(cnt[out_c]==k)valid--;
             cnt[out_c]--;
             if(cnt[out_c]==k)valid++;
 
-            if(valid==d)
-            {
-                ans++;
-            }
+            if(valid==d)ans++;
         }
-
     }
     cout<<ans;
     return 0;

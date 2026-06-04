@@ -155,50 +155,110 @@
 //     return 0;
 // }
 
-//指数型枚举
+// //指数型枚举
+// #include<bits/stdc++.h>
+// using namespace std;
+// int b[4];
+// int num[]={6,2,5,5,4,5,6,3,7,6};
+// int n;
+// int ans;
+// int getneed(int x)
+// {
+//     if(x==0)return num[0];
+//     int temp=0;
+//     while(x)
+//     {
+//         temp+=num[x%10];
+//         x/=10;
+//     }
+//     return temp;
+// }
+// void dfs(int x,int cnt)
+// {
+//     if(cnt>n)return;//这个剪纸是必须的
+//     if(x>3)
+//     {
+//         if(b[1]+b[2]==b[3]&&cnt==n)
+//         {
+//             ans++;
+//         }
+//         return;
+//     }
+
+//     // for(int i=0;i<=9;i++)
+//     // {
+//     //     b[x]=i;
+//     //     dfs(x+1);
+//     // }
+//     for(int i=0;i<=1000;i++)
+//     {
+//         b[x]=i;
+//         int need_=getneed(i);
+//         dfs(x+1,cnt+need_);
+//     }
+// }
+// int main()
+// {
+//     cin>>n;
+//     n-=4;
+//     dfs(1,0);
+//     cout<<ans;
+//     return 0;
+// }
+
+
 #include<bits/stdc++.h>
 using namespace std;
-int b[4];
-int num[]={6,2,5,5,4,5,6,3,7,6};
+#define int long long
 int n;
-int ans;
-int getneed(int x)
+int a[]={6,2,5,5,4,5,6,3,7,6};
+int b[4];
+bool st[10002];//标记哪个数字是是否被选择了
+int ans=0;
+//选3个数字呗
+int getsum(int x)
 {
-    if(x==0)return num[0];
+    if(x==0)return 6;
     int temp=0;
     while(x)
     {
-        temp+=num[x%10];
+        temp+=a[x%10];
         x/=10;
     }
     return temp;
 }
 void dfs(int x,int cnt)
 {
-    if(cnt>n)return;//这个剪纸是必须的
-    if(x>3)
+    if(cnt>n)return;
+    if(x>3)//我靠这里写的是3不是n啊
     {
-        if(b[1]+b[2]==b[3]&&cnt==n)
+        if(cnt==n)
         {
+            if(b[1]+b[2]==b[3])
             ans++;
         }
-        return;
+        return ;
     }
-
-    // for(int i=0;i<=9;i++)
-    // {
-    //     b[x]=i;
-    //     dfs(x+1);
-    // }
     for(int i=0;i<=1000;i++)
     {
+        // if(!st[i])
+        // {
+        //     st[i]=1;
+        //     b[x]=i;
+        //     dfs(x+1,cnt+getsum(i));
+        //     st[i]=0;
+        // }
+
+        st[i]=1;
         b[x]=i;
-        int need_=getneed(i);
-        dfs(x+1,cnt+need_);
+        dfs(x+1,cnt+getsum(i));
+        st[i]=0;
     }
+
 }
-int main()
+signed main()
 {
+    ios::sync_with_stdio(0),cin.tie(0),cout.tie(0);
     cin>>n;
     n-=4;
     dfs(1,0);

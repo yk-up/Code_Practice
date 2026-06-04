@@ -210,67 +210,123 @@
 //     return 0;
 // }
 
+// #include<bits/stdc++.h>
+// using namespace std;
+// #define int long long
+// const int p=1e9+7;
+// int n;
+// const int N=1e5+11;
+// int ans;
+// int C(int n,int m)
+// {
+//     //一个条件都不能拉下
+//     if(m>n)return 0;
+//     if(m==0||m==n)return 1;
+//     if(n-m<m)m=n-m;
+//     return C(n-1,m-1)+C(n-1,m);
+//     //C(n,m)=C(n,n-m);
+//     //return (m==1)?n:(n-1)*n/2;
+// }
+// int nums[N];//存不同长度的木棍
+// signed main()
+// {
+//     cin>>n;
+//     int maxlen=-1;
+//     for(int i=1;i<=n;i++)
+//     {
+//         int x;cin>>x;
+//         nums[x]++;
+//         maxlen=max(maxlen,x);
+//     }
+//     // //其中有两个的和等于另外一边的长度(枚举这两个较短的一根)
+//     // for(int i=1;i<=maxlen/2;i++)
+//     // {
+//     //     int l=i;
+//     //     if(nums[l]&&num[i-i])
+//     //     {
+//     //         if()
+//     //     }
+//     // }
+//     //枚举三角形的边长感觉会更好一点
+
+//     for(int l=2;l<=maxlen;l++)
+//     {
+//         if(nums[l]>=2)
+//         {
+//             int temp1=C(nums[l],2);
+//             for(int i=1;i<=l/2;i++)//两个棍
+//             {
+//                 int a=i,b=l-i;
+//                 if(a!=b)
+//                 {
+//                     if(nums[a]&&nums[b])
+//                     {
+//                         ans+=temp1*(C(nums[a],1)*C(nums[b],1))%p;
+//                     }
+//                 }
+//                 else ans+=(temp1*(C(nums[a],2)))%p;
+//             }
+//             //ans=(ans+temp)%p;//这样写的不对有可能temp就是最上面的C(nums[l],2)即使没找到短的两条边，也会加上
+//             ans%=p;
+//         }
+        
+//     }
+//     cout<<ans;
+//     return 0;
+// }
+
+
 #include<bits/stdc++.h>
 using namespace std;
 #define int long long
-const int p=1e9+7;
-int n;
 const int N=1e5+11;
-int ans;
+const int p=1e9+7;
+int a[N];
+int cnt[N];//长度为i的木棍有多少
+int n; 
 int C(int n,int m)
 {
-    //一个条件都不能拉下
     if(m>n)return 0;
-    if(m==0||m==n)return 1;
+    if(n==m||m==0)return 1;
     if(n-m<m)m=n-m;
     return C(n-1,m-1)+C(n-1,m);
-    //C(n,m)=C(n,n-m);
-    //return (m==1)?n:(n-1)*n/2;
 }
-int nums[N];//存不同长度的木棍
 signed main()
 {
+    ios::sync_with_stdio(0),cin.tie(0),cout.tie(0);
     cin>>n;
-    int maxlen=-1;
+    int maxlen=0;
     for(int i=1;i<=n;i++)
     {
-        int x;cin>>x;
-        nums[x]++;
-        maxlen=max(maxlen,x);
+        cin>>a[i];
+        cnt[a[i]]++;
+        maxlen=max(maxlen,a[i]);
     }
-    // //其中有两个的和等于另外一边的长度(枚举这两个较短的一根)
-    // for(int i=1;i<=maxlen/2;i++)
-    // {
-    //     int l=i;
-    //     if(nums[l]&&num[i-i])
-    //     {
-    //         if()
-    //     }
-    // }
-    //枚举三角形的边长感觉会更好一点
-
-    for(int l=2;l<=maxlen;l++)
+    int ans=0;
+    //首先选两个长度一样的，其次就是选择两个木棒的和=长的木棍
+    for(int i=1;i<=maxlen;i++)
     {
-        if(nums[l]>=2)
+        if(cnt[i]>=2)
         {
-            int temp1=C(nums[l],2);
-            for(int i=1;i<=l/2;i++)//两个棍
+            //选择两个短的
+            int temp=C(cnt[i],2)%p;
+            //不相等的情况
+            //for(int k=1;k<i/2;k++)//比如5/2 =2 k<2 会漏掉k=2这种情况
+            for(int k=1;2*k<i;k++)
             {
-                int a=i,b=l-i;
-                if(a!=b)
+                if(cnt[k]&&cnt[i-k])
                 {
-                    if(nums[a]&&nums[b])
-                    {
-                        ans+=temp1*(C(nums[a],1)*C(nums[b],1))%p;
-                    }
+                    ans=(ans+(temp)*(C(cnt[k],1)*C(cnt[i-k],1)%p)%p)%p;
                 }
-                else ans+=(temp1*(C(nums[a],2)))%p;
             }
-            //ans=(ans+temp)%p;//这样写的不对有可能temp就是最上面的C(nums[l],2)即使没找到短的两条边，也会加上
-            ans%=p;
+
+            //相等的情况
+            if(i%2==0&&cnt[i/2]>=2)
+            {
+                ans=(ans+temp*C(cnt[i/2],2)%p)%p;
+            }
         }
-        
     }
-    cout<<ans;
+    cout<<ans%p;
     return 0;
 }

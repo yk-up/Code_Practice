@@ -202,3 +202,48 @@
 //     return 0;
 // }
 
+
+
+
+#include<bits/stdc++.h>
+using namespace std;
+#define int long long
+const int N=100;
+char a[N][N];
+int n,m;
+signed main()
+{
+    ios::sync_with_stdio(0),cin.tie(0),cout.tie(0);
+    cin>>n>>m;
+    for(int i=1;i<=n;i++)
+    {
+        for(int j=1;j<=m;j++)cin>>a[i][j];
+    }
+    int ans=0x3f3f3f3f;
+    //枚举白色下界  红下界
+    for(int i=1;i<=n-2;i++)
+    {
+        for(int j=i+1;j<=n-1;j++)
+        {
+            int temp=0;//注意这个的初始化位置
+            //1-i，白色
+            for(int k=1;k<=i;k++)
+            {
+                for(int z=1;z<=m;z++)if(a[k][z]!='W')temp++;
+            }
+            //i+1,j
+            for(int k=i+1;k<=j;k++)
+            {
+                for(int z=1;z<=m;z++)if(a[k][z]!='B')temp++;
+            }
+
+            for(int k=j+1;k<=n;k++)
+            {
+                for(int z=1;z<=m;z++)if(a[k][z]!='R')temp++;
+            }
+            ans=min(ans,temp);
+        }
+    }
+    cout<<ans;
+    return 0;
+}

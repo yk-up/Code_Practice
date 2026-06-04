@@ -140,47 +140,44 @@
 //     return 0;
 // }
 
-
-
 #include<bits/stdc++.h>
 using namespace std;
-const int N=100;
+#define int long long
 int s[5];
-int a[5][N];
-int l=0,r=0;
-int ans=0;
-int temp;
-void dfs(int x,int y)
+int a[5][100];
+int dp[1202];
+signed main()
 {
-    if(y>s[x])
-    {
-        temp=min(temp,max(l,r));
-        return;
-    }
-
-    l+=a[x][y];
-    dfs(x,y+1);
-    l-=a[x][y];
-
-    r+=a[x][y];
-    dfs(x,y+1);
-    r-=a[x][y];
-}
-int main()
-{
-    for(int i=1;i<=4;i++)cin>>s[i];
-
+    ios::sync_with_stdio(0),cin.tie(0),cout.tie(0);
+    cin>>s[1]>>s[2]>>s[3]>>s[4];
     for(int i=1;i<=4;i++)
     {
-        for(int j=1;j<=s[i];j++)cin>>a[i][j];
+        for(int j=1;j<=s[i];j++)
+        {
+            cin>>a[i][j];
+        }
     }
+    int ans=0;
     for(int i=1;i<=4;i++)
     {
-        l=0,r=0;
-        temp=0x3f3f3f3f;
-        dfs(i,1);
-        ans+=temp;
+        memset(dp,0,sizeof dp);
+        int sum=0;//找最接近sum/2的数字
+        for(int j=1;j<=s[i];j++)
+        {
+            sum+=a[i][j];
+        }
+        for(int j=1;j<=s[i];j++)
+        {
+            for(int k=sum/2;k>=0;k--)
+            {
+                if(k>=a[i][j])
+                {
+                    dp[k]=max(dp[k],dp[k-a[i][j]]+a[i][j]);
+                }
+            }
+        }
+        ans+=(sum-dp[sum/2]);
     }
-    cout<<ans<<endl;
+    cout<<ans;
     return 0;
 }
