@@ -60,7 +60,7 @@ signed main()
     {
         if(ed<it.first)
         {
-            if(st!=0x3f3f3f3f)res.push_back({st,ed});
+            if(st!=-0x3f3f3f3f)res.push_back({st,ed});
             st=it.first;
             ed=it.second;
         }

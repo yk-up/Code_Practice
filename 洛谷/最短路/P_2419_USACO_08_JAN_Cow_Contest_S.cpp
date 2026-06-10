@@ -116,26 +116,67 @@
 // }
 
 
+// #include<bits/stdc++.h>
+// using namespace std;
+// const int N=200;
+// int win[N][N];
+// int n,m;
+// int main()
+// {
+//     ios::sync_with_stdio(0),cin.tie(0),cout.tie(0);
+//     cin>>n>>m;
+//     for(int i=0;i<m;i++)
+//     {
+//         int a,b;cin>>a>>b;
+//         win[a][b]=1;
+//     }
+//     for(int k=1;k<=n;k++)
+//     {
+//         for(int i=1;i<=n;i++)
+//         {
+//             for(int j=1;j<=n;j++)
+//             win[i][j]|=win[i][k]&&win[k][j];
+//         }
+//     }
+
+//     int ans=0;
+//     for(int i=1;i<=n;i++)
+//     {
+//         int cnt=0;
+//         for(int j=1;j<=n;j++)
+//         {
+//             if(win[i][j]||win[j][i])cnt++;
+//         }
+//         if(cnt==n-1)ans++;
+//     }
+//     cout<<ans;
+//     return 0;
+// }
+
 #include<bits/stdc++.h>
 using namespace std;
-const int N=200;
-int win[N][N];
+#define int long long
+const int N=102;
+bool win[N][N];
 int n,m;
-int main()
+signed main()
 {
     ios::sync_with_stdio(0),cin.tie(0),cout.tie(0);
     cin>>n>>m;
-    for(int i=0;i<m;i++)
+    for(int i=1;i<=m;i++)
     {
         int a,b;cin>>a>>b;
         win[a][b]=1;
     }
+
     for(int k=1;k<=n;k++)
     {
         for(int i=1;i<=n;i++)
         {
             for(int j=1;j<=n;j++)
-            win[i][j]|=win[i][k]&&win[k][j];
+            {
+                win[i][j]|=(win[i][k]&&win[k][j]);
+            }
         }
     }
 
@@ -145,10 +186,12 @@ int main()
         int cnt=0;
         for(int j=1;j<=n;j++)
         {
+            if(i==j)continue;
             if(win[i][j]||win[j][i])cnt++;
         }
         if(cnt==n-1)ans++;
     }
+    //cout<<cnt;
     cout<<ans;
     return 0;
 }

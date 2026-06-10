@@ -201,24 +201,29 @@
 // }
 
 
-
-
 #include<bits/stdc++.h>
 using namespace std;
-const int N=1e3+11;
-int dp[N];//凑够 j 元需要的最少纸币数量
-int a[N];
+#define int long long
+const int N=1e4+11;
 int n,w;
-int main()
+int a[N];
+int dp[N];//达到i元最少需要几张纸币
+signed main()
 {
+    ios::sync_with_stdio(0),cin.tie(0),cout.tie(0);
     cin>>n>>w;
     memset(dp,0x3f,sizeof dp);
     dp[0]=0;
     for(int i=1;i<=n;i++)cin>>a[i];
     for(int i=1;i<=n;i++)
     {
-        for(int j=a[i];j<=w;j++)
-        dp[j]=min(dp[j],dp[j-a[i]]+1);
+        for(int j=0;j<=w;j++)
+        {
+            if(j>=a[i])
+            {
+                dp[j]=min(dp[j],dp[j-a[i]]+1);
+            }
+        }
     }
     cout<<dp[w];
     return 0;

@@ -84,25 +84,56 @@
 
 
 
+// #include<bits/stdc++.h>
+// using namespace std;
+// const int N=1e4+11;
+// const int p=1e9+7;
+// int a[N];
+// int dp[N];//以 i 结尾的方案数量
+// int n,w;
+// int main()
+// {
+//     cin>>n>>w;
+//     for(int i=1;i<=n;i++)cin>>a[i];
+
+//     dp[0]=1;
+//     for(int j=1;j<=w;j++)
+//     {
+//         for(int i=1;i<=n;i++)
+//         {
+//             if(j>=a[i])
+//             dp[j]=(dp[j]+dp[j-a[i]])%p;
+//         }
+//     }
+//     cout<<dp[w];
+    
+//     return 0;
+// }
+
+
 #include<bits/stdc++.h>
 using namespace std;
-const int N=1e4+11;
+#define int long long
 const int p=1e9+7;
-int a[N];
-int dp[N];//以 i 结尾的方案数量
+const int N=1e4+11;
 int n,w;
-int main()
+int dp[N];
+int a[N];
+signed main()
 {
+    ios::sync_with_stdio(0),cin.tie(0),cout.tie(0);
     cin>>n>>w;
     for(int i=1;i<=n;i++)cin>>a[i];
-
     dp[0]=1;
-    for(int j=1;j<=w;j++)
+    for(int j=0;j<=w;j++)
     {
         for(int i=1;i<=n;i++)
         {
             if(j>=a[i])
-            dp[j]=(dp[j]+dp[j-a[i]])%p;
+            {
+                // dp[j]+=dp[j-a[i]];
+                dp[j]=(dp[j]+dp[j-a[i]])%p;
+            }
         }
     }
     cout<<dp[w];

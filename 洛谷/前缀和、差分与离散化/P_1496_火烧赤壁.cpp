@@ -35,7 +35,7 @@
 // // }
 
 
-// //离散化本质上
+// //化本质上
 // #include<bits/stdc++.h>
 // using namespace std;
 // const int N=2e4+11;

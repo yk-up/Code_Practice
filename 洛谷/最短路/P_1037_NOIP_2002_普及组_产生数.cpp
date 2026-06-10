@@ -220,68 +220,123 @@
 // }
 
 
+// #include<bits/stdc++.h>
+// using namespace std;
+// const int N=10;
+// int cnt[N];//每种数字有多少种可能
+// string n;int k;
+// bool reach[N][N];
+// struct BigInt
+// {
+//     vector<int>d;
+//     BigInt(int x)
+//     {
+//         if(x==0)d.push_back(0);
+//         while(x)
+//         {
+//             d.push_back(x%10);
+//             x/=10;
+//         }
+//     }
+
+//     void mul(int x)
+//     {
+//         int carry=0;
+//         for(int i=0;i<d.size();i++)
+//         {
+//             int t=carry+d[i]*x;
+//             d[i]=t%10;
+//             carry=t/10;
+//         }
+
+//         while(carry)
+//         {
+//             d.push_back(carry%10);
+//             carry/=10;
+//         }
+//     }
+
+//     void print()
+//     {
+//         for(int i=d.size()-1;i>=0;i--)cout<<d[i];
+//     }
+// };
+// int main()
+// {
+//     ios::sync_with_stdio(0),cin.tie(0),cout.tie(0);
+//     cin>>n>>k;
+//     for(int i=0;i<k;i++)
+//     {
+//         int x,y;cin>>x>>y;
+//         reach[x][y]=1;
+//     }
+//     for(int i=0;i<=9;i++)reach[i][i]=1;
+
+//     for(int k=0;k<=9;k++)
+//     {
+//         for(int i=0;i<=9;i++)
+//         {
+//             for(int j=0;j<=9;j++)
+//             {
+//                 reach[i][j]|=reach[i][k]&&reach[k][j];
+//             }
+//         }
+//     }
+//     for(int i=0;i<=9;i++)
+//     {
+//         for(int j=0;j<=9;j++)
+//         {
+//             if(reach[i][j])cnt[i]++;
+//         }
+//     }
+
+//     BigInt ans(1);
+//     for(int i=0;i<n.size();i++)
+//     {
+//         ans.mul(cnt[n[i]-'0']);
+//     }
+//     ans.print();
+//     return 0;
+// }
+
+
 #include<bits/stdc++.h>
 using namespace std;
+#define int long long
 const int N=10;
-int cnt[N];//每种数字有多少种可能
+bool reach[N][N];//两数字可以互换
 string n;int k;
-bool reach[N][N];
-struct BigInt
+int cnt[N];
+void print(__int128 x)
 {
-    vector<int>d;
-    BigInt(int x)
-    {
-        if(x==0)d.push_back(0);
-        while(x)
-        {
-            d.push_back(x%10);
-            x/=10;
-        }
-    }
-
-    void mul(int x)
-    {
-        int carry=0;
-        for(int i=0;i<d.size();i++)
-        {
-            int t=carry+d[i]*x;
-            d[i]=t%10;
-            carry=t/10;
-        }
-
-        while(carry)
-        {
-            d.push_back(carry%10);
-            carry/=10;
-        }
-    }
-
-    void print()
-    {
-        for(int i=d.size()-1;i>=0;i--)cout<<d[i];
-    }
-};
-int main()
+    if(x==0)return ;
+    print(x/10);
+    cout<<(char)(x%10+'0');
+}
+signed main()
 {
     ios::sync_with_stdio(0),cin.tie(0),cout.tie(0);
     cin>>n>>k;
-    for(int i=0;i<k;i++)
+    for(int i=1;i<=k;i++)
     {
         int x,y;cin>>x>>y;
-        reach[x][y]=1;
+        //reach[x][y]=reach[y][x]=1;
+        reach[x][y]=1;//单向的
     }
-    for(int i=0;i<=9;i++)reach[i][i]=1;
 
+    for(int i=0;i<=9;i++)reach[i][i]=1;
     for(int k=0;k<=9;k++)
     {
         for(int i=0;i<=9;i++)
         {
             for(int j=0;j<=9;j++)
             {
-                reach[i][j]|=reach[i][k]&&reach[k][j];
+                reach[i][j]|=(reach[i][k]&reach[k][j]);
             }
         }
     }
+
+    __int128 ans=1;
     for(int i=0;i<=9;i++)
     {
         for(int j=0;j<=9;j++)
@@ -289,12 +344,11 @@ int main()
             if(reach[i][j])cnt[i]++;
         }
     }
-
-    BigInt ans(1);
     for(int i=0;i<n.size();i++)
     {
-        ans.mul(cnt[n[i]-'0']);
+        ans=ans*(cnt[n[i]-'0']);
     }
-    ans.print();
+    if(ans==0)cout<<0;
+    else print(ans);
     return 0;
 }

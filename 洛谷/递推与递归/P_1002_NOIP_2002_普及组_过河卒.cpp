@@ -199,37 +199,84 @@
 //     return 0;
 // }
 
-//掌握的不好
+// //掌握的不好
+// #include<bits/stdc++.h>
+// using namespace std;
+// int n,m,mx,my;
+// int dp[30][30];//dp[i][j]到达i，j的路径条数
+// bool st[30][30];//标记不能走的位置
+// int dx[]={1,1,-1,-1,2,2,-2,-2};
+// int dy[]={2,-2,2,-2,1,-1,1,-1};
+// int main()
+// {
+//     ios::sync_with_stdio(0),cin.tie(0),cout.tie(0);
+//     cin>>n>>m>>mx>>my;
+//     for(int i=0;i<8;i++)
+//     {
+//         int xx=mx+dx[i];
+//         int yy=my+dy[i];
+//         if(xx<0||xx>n||yy<0||yy>m)continue;
+//         st[xx][yy]=1;
+//     }
+//     st[mx][my]=1;
+//     //dp[0][0]=1;
+//     for(int i=0;i<=n;i++)
+//     {
+//         for(int j=0;j<=m;j++)
+//         {
+//             //这行代码很重要
+//             if(i==0&&j==0)continue;
+//             if(st[i][j])continue;
+//             if(i-1<0)dp[i][j]=dp[i][j-1];
+//             else if(j-1<0)dp[i][j]=dp[i-1][j];
+//             else dp[i][j]=dp[i-1][j]+dp[i][j-1];
+//         }
+//     }
+//     cout<<dp[n][m];
+//     return 0;
+// }
+
 #include<bits/stdc++.h>
 using namespace std;
+#define int long long
+const int N=30;
 int n,m,mx,my;
-int dp[30][30];//dp[i][j]到达i，j的路径条数
-bool st[30][30];//标记不能走的位置
-int dx[]={1,1,-1,-1,2,2,-2,-2};
-int dy[]={2,-2,2,-2,1,-1,1,-1};
-int main()
+int ddx[]={0,1};
+int ddy[]={1,0};
+int dx[]={2,2,-2,-2,1,1,-1,-1};
+int dy[]={1,-1,1,-1,2,-2,2,-2};
+bool st[N][N];
+int dp[N][N];
+signed main()
 {
     ios::sync_with_stdio(0),cin.tie(0),cout.tie(0);
     cin>>n>>m>>mx>>my;
+    st[mx][my]=1;
     for(int i=0;i<8;i++)
     {
-        int xx=mx+dx[i];
-        int yy=my+dy[i];
-        if(xx<0||xx>n||yy<0||yy>m)continue;
-        st[xx][yy]=1;
+        int x=mx+dx[i];
+        int y=my+dy[i];
+        if(x<0||x>n||y<0||y>m)continue;
+        st[x][y]=1;
     }
-    st[mx][my]=1;
-    //dp[0][0]=1;
+    //dp[i][j]=dp[i-1][j]+dp[i][j-1];
+
+    dp[0][0]=1;
     for(int i=0;i<=n;i++)
     {
         for(int j=0;j<=m;j++)
         {
-            //这行代码很重要
             if(i==0&&j==0)continue;
             if(st[i][j])continue;
-            if(i-1<0)dp[i][j]=dp[i][j-1];
-            else if(j-1<0)dp[i][j]=dp[i-1][j];
-            else dp[i][j]=dp[i-1][j]+dp[i][j-1];
+            if(i==0)
+            {
+                dp[i][j]=dp[i][j-1];
+            }
+            else if(j==0) dp[i][j]=dp[i-1][j];
+            else
+            {
+                dp[i][j]=dp[i-1][j]+dp[i][j-1];
+            }
         }
     }
     cout<<dp[n][m];

@@ -74,25 +74,28 @@
 // }
 
 
-//还是感觉理解的不好
-#include<bits/stdc++.h>
-using namespace std;
-const int N=30;
-int dp[N][N];//dp[i][j] i个元素未入栈 j栈中已经有的元素
-int n;
-int main()
-{
-    ios::sync_with_stdio(0),cin.tie(0),cout.tie(0);
-    cin>>n;
-    for(int i=0;i<=n;i++)
-    {
-        for(int j=0;j<=n;j++)
-        {
-            if(!i)dp[i][j]=1;
-            else if(j<1)dp[i][j]=dp[i-1][j+1];
-            else dp[i][j]=dp[i-1][j+1]+dp[i][j-1];
-        }
-    }
-    cout<<dp[n][0];
-    return 0;
-}
+// //还是感觉理解的不好
+// #include<bits/stdc++.h>
+// using namespace std;
+// const int N=30;
+// int dp[N][N];//dp[i][j] i个元素未入栈 j栈中已经有的元素
+// int n;
+// int main()
+// {
+//     ios::sync_with_stdio(0),cin.tie(0),cout.tie(0);
+//     cin>>n;
+//     for(int i=0;i<=n;i++)
+//     {
+//         for(int j=0;j<=n;j++)
+//         {
+//             if(!i)dp[i][j]=1;
+//             else if(j<1)dp[i][j]=dp[i-1][j+1];
+//             else dp[i][j]=dp[i-1][j+1]+dp[i][j-1];
+//         }
+//     }
+//     cout<<dp[n][0];
+//     return 0;
+// }
+
+//dp[i][j]//
+

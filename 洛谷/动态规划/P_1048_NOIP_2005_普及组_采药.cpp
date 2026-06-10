@@ -42,40 +42,67 @@
 // }
 
 
+// #include<bits/stdc++.h>
+// using namespace std;
+// int t,m;
+// const int N=2000;
+// int w[N],v[N];
+// int dp[N][N];
+// int main()
+// {
+//     ios::sync_with_stdio(0),cin.tie(0),cout.tie(0);
+//     cin>>t>>m;
+//     //0，1背包
+//     for(int i=1;i<=m;i++)cin>>w[i]>>v[i];
+
+//     // for(int i=1;i<=m;i++)
+//     // {
+//     //     for(int j=t;j>=0;j--)
+//     //     {
+//     //         if(j>=w[i])
+//     //         {
+//     //             dp[j]=max(dp[j],dp[j-w[i]]+v[i]);
+//     //         }
+//     //     }
+//     // }
+//     // cout<<dp[t];
+
+//     for(int i=1;i<=m;i++)
+//     {
+//         for(int j=0;j<=t;j++)
+//         {
+//             dp[i][j]=dp[i-1][j];
+//             if(j>=w[i])
+//             dp[i][j]=max(dp[i-1][j],dp[i-1][j-w[i]]+v[i]);
+//         }
+//     }
+//     cout<<dp[m][t];
+//     return 0;
+// }
+
+
 #include<bits/stdc++.h>
 using namespace std;
-int t,m;
-const int N=2000;
-int w[N],v[N];
-int dp[N][N];
-int main()
+#define int long long
+const int N=102;
+int t[N],m[N];
+int dp[N];
+int T,M;
+signed main()
 {
     ios::sync_with_stdio(0),cin.tie(0),cout.tie(0);
-    cin>>t>>m;
-    //0，1背包
-    for(int i=1;i<=m;i++)cin>>w[i]>>v[i];
-
-    // for(int i=1;i<=m;i++)
-    // {
-    //     for(int j=t;j>=0;j--)
-    //     {
-    //         if(j>=w[i])
-    //         {
-    //             dp[j]=max(dp[j],dp[j-w[i]]+v[i]);
-    //         }
-    //     }
-    // }
-    // cout<<dp[t];
-
-    for(int i=1;i<=m;i++)
+    cin>>T>>M;
+    for(int i=1;i<=M;i++)cin>>t[i]>>m[i];
+    for(int i=1;i<=M;i++)
     {
-        for(int j=0;j<=t;j++)
+        for(int j=T;j>=0;j--)
         {
-            dp[i][j]=dp[i-1][j];
-            if(j>=w[i])
-            dp[i][j]=max(dp[i-1][j],dp[i-1][j-w[i]]+v[i]);
+            if(j>=t[i])
+            {
+                dp[j]=max(dp[j],dp[j-t[i]]+m[i]);
+            }
         }
     }
-    cout<<dp[m][t];
+    cout<<dp[T];
     return 0;
 }
